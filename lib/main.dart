@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_movie_recomandation_app/Theme/custom_theme.dart';
+import 'package:my_movie_recomandation_app/Theme/palette.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Movie Recommendation App',
+      darkTheme: CustomTheme.darkTheme(context),
+      themeMode: ThemeMode.dark,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
