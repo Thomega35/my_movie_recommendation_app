@@ -29,7 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_riverpod: 1.0.4 # This is the package that we are using to manage the state of the app
+  riverpod: 1.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
