@@ -21,8 +21,8 @@ class ResultScreen extends StatelessWidget {
         'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
     voteAverage: 8.5,
     releaseDate: '2019-12-25',
-    backdropPath: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg',
-    posterPath: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg',
+    backdropPath: '',
+    posterPath: '',
   );
   @override
   Widget build(BuildContext context) {
