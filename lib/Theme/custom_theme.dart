@@ -29,14 +29,16 @@ class CustomTheme {
         elevation: 0,
       ),
       sliderTheme: SliderThemeData(
-        activeTrackColor: Colors.white,
+        activeTrackColor: Colors.orange,
         inactiveTrackColor: Colors.grey.shade800,
         thumbColor: Colors.white,
         valueIndicatorColor: Palette.red500,
         inactiveTickMarkColor: Colors.transparent,
         activeTickMarkColor: Colors.transparent,
       ),
-      textTheme: theme.primaryTextTheme
+      textTheme: theme.primaryTextTheme.apply(
+        bodyColor: Palette.red500,
+      )
         .copyWith(
           button: theme.primaryTextTheme.button?.copyWith(
             color: Colors.white,
@@ -49,7 +51,7 @@ class CustomTheme {
         ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          backgroundColor: Palette.red500,
+          backgroundColor: Colors.blue,
         ),
       ),
     );

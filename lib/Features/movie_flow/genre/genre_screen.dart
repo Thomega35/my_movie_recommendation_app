@@ -73,7 +73,7 @@ class _GenreScreenState extends State<GenreScreen> {
             ),
             PrimaryButton(
               onPressed: widget.nextPage,
-              text: 'continue',
+              text: 'Continue',
             ),
             const SizedBox(
               height: kMediumSpacing,
