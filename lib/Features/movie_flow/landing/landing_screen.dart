@@ -16,7 +16,6 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movie Recommendation App'),
         elevation: 0,
       ),
       body: Center(
@@ -34,8 +33,8 @@ class LandingScreen extends StatelessWidget {
               text: 'Get Started',
               onPressed: nextPage,
             ),
-            const SizedBox(height: kMediumSacing),
-            
+            const SizedBox(height: kMediumSpacing),
+
           ],
         ),
       ),
