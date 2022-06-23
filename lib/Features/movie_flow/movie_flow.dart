@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_movie_recomandation_app/Features/movie_flow/rating/rating_screen.dart';
+import 'package:my_movie_recomandation_app/Features/movie_flow/years_back/years_back_screen.dart';
 
 import 'genre/genre_screen.dart';
 import 'landing/landing_screen.dart';
@@ -41,8 +43,8 @@ class _MovieFlowState extends State<MovieFlow> {
       children: [
         LandingScreen(nextPage: nextPage, previousPage: previousPage),
         GenreScreen(nextPage: nextPage, previousPage: previousPage),
-        Scaffold(body: Container(color: Colors.blue,)),
-        Scaffold(body: Container(color: Colors.yellow,)),
+        RatingScreen(nextPage: nextPage, previousPage: previousPage),
+        YearsBackScreen(nextPage: nextPage, previousPage: previousPage)
       ],
     );
   }
