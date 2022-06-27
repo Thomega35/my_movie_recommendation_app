@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:my_movie_recomandation_app/Core/widgets/primary_button.dart';
 import 'package:my_movie_recomandation_app/Core/constants.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recomandation_app/Features/movie_flow//movie_flow_controller.dart';
 import 'movie.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ConsumerWidget {
   static route({bool fullScreenDialog = true}) => MaterialPageRoute(
         builder: (context) => const ResultScreen(),
         fullscreenDialog: fullScreenDialog,
@@ -14,18 +15,9 @@ class ResultScreen extends StatelessWidget {
 
   final double movieHeight = 150;
 
-  final movie = const Movie(
-    title: 'The Irishman',
-    genres: [Genre(name: 'Drama'), Genre(name: 'Thriller')],
-    overview:
-        'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-    voteAverage: 8.5,
-    releaseDate: '2019-12-25',
-    backdropPath: '',
-    posterPath: '',
-  );
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
       ),
@@ -42,7 +34,7 @@ class ResultScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       bottom: -(movieHeight / 2),
                       child: MovieImageDetail(
-                        movie: movie,
+                        movie: ref.watch(movieFlowControllerProvider).movie,
                         movieHeight: movieHeight,
                       ),
                     ),
@@ -54,7 +46,7 @@ class ResultScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    movie.overview,
+                    ref.watch(movieFlowControllerProvider).movie.overview,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
@@ -101,7 +93,7 @@ class CoverImage extends StatelessWidget {
   }
 }
 
-class MovieImageDetail extends StatelessWidget {
+class MovieImageDetail extends ConsumerWidget {
   const MovieImageDetail({
     Key? key,
     required this.movie,
@@ -112,7 +104,7 @@ class MovieImageDetail extends StatelessWidget {
   final double movieHeight;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),

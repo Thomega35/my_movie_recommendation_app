@@ -57,4 +57,7 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state.pageController.dispose();
     super.dispose();
   }
+
+
 }
+

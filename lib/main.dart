@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie Recommendation App',
       darkTheme: CustomTheme.darkTheme(context),
       themeMode: ThemeMode.dark,
-      home: const MovieFlow(),
+      home: MovieFlow(),
     );
   }
 }
