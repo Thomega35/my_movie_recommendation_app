@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre_entity.dart';
 
 @immutable
 class Genre {
@@ -7,6 +8,13 @@ class Genre {
   final int id;
 
   const Genre({required this.name, this.isSelected = false, this.id = 0});
+  factory Genre.fromJson(GenreEntity genreEntity) {
+    return Genre(
+      name: genreEntity.name,
+      id: genreEntity.id,
+      isSelected: false,
+    );
+  }
 
   Genre toggleSelected() {
     return Genre(
