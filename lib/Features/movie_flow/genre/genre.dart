@@ -8,7 +8,7 @@ class Genre {
   final int id;
 
   const Genre({required this.name, this.isSelected = false, this.id = 0});
-  factory Genre.fromJson(GenreEntity genreEntity) {
+  factory Genre.fromEntity(GenreEntity genreEntity) {
     return Genre(
       name: genreEntity.name,
       id: genreEntity.id,
