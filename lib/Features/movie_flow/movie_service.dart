@@ -5,14 +5,14 @@ import 'package:my_movie_recomandation_app/Features/movie_flow/movie_repository.
 import 'package:my_movie_recomandation_app/Features/movie_flow/result/movie.dart';
 import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre.dart';
 
-final movieServiceyProvider = Provider<MovieService>((ref) {
+final movieServiceProvider = Provider<MovieService>((ref) {
   final movieRepository = ref.watch(movieRepositoryProvider);
   return TMDBMovieService(movieRepository);
 },);
 
 abstract class MovieService {
   Future<List<Genre>> getGenres();
-  Future<Movie> getRecommendedMovies(int rating, int yearsBack, List<Genre> genres, [DateTime? yearsBackFromDate]);
+  Future<Movie> getRecommendedMovie(int rating, int yearsBack, List<Genre> genres, [DateTime? yearsBackFromDate]);
 }
 
 class TMDBMovieService implements MovieService{
@@ -27,7 +27,7 @@ class TMDBMovieService implements MovieService{
   }
 
   @override
-  Future<Movie> getRecommendedMovies(int rating, int yearsBack, List<Genre> genres, [DateTime? yearsBackFromDate]) async{
+  Future<Movie> getRecommendedMovie(int rating, int yearsBack, List<Genre> genres, [DateTime? yearsBackFromDate]) async{
     final date = yearsBackFromDate ?? DateTime.now();
     final year = date.year - yearsBack;
     final genreIds = genres.map((e) => e.id).toList().join(',');

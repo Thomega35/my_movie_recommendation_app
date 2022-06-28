@@ -32,7 +32,7 @@ class YearsBackScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${ref.watch(movieFlowControllerProvider).yearsback}',
+                  '${ref.watch(movieFlowControllerProvider).yearsBack}',
                   style: theme.textTheme.headline2,
                 ),
                 Text(
@@ -45,17 +45,22 @@ class YearsBackScreen extends ConsumerWidget {
             ),
             const Spacer(),
             Slider(
-                value: ref.watch(movieFlowControllerProvider).yearsback.toDouble(),
+                value: ref.watch(movieFlowControllerProvider).yearsBack.toDouble(),
                 onChanged: (value) => ref.read(movieFlowControllerProvider.notifier).updateYearsBack(value.toInt()),
                 min: 0,
                 max: 70,
                 divisions: 70,
-                label: '${ref.watch(movieFlowControllerProvider).yearsback}',
+                label: '${ref.watch(movieFlowControllerProvider).yearsBack}',
             ),
             const Spacer(),
             PrimaryButton(
               text: 'Amazing!',
-              onPressed: () => Navigator.of(context).push(ResultScreen.route()),
+              onPressed: () async {
+                await ref.read(movieFlowControllerProvider.notifier).getRecommendedMovie();
+                print(ref.watch(movieFlowControllerProvider).movie);
+                Navigator.of(context).push(ResultScreen.route());
+              },
+              isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
             ),
             const SizedBox(height: kMediumSpacing),
          ],
