@@ -20,7 +20,7 @@ class MovieEntity {
     this.posterPath,
   });
 
-  factory MovieEntity.fromJson(Map<String, dynamic> map) {
+  factory MovieEntity.fromMap(Map<String, dynamic> map) {
     return MovieEntity(
       title: map['title'],
       overview: map['overview'],
