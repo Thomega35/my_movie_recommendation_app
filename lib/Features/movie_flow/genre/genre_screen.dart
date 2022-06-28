@@ -30,19 +30,27 @@ class GenreScreen extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
             Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(vertical: kListItemSpacing),
-                itemBuilder: (context, index) {
-                  final genre = ref.watch(movieFlowControllerProvider).genres[index];
-                  return ListCard(
-                    genre: genre,
-                    onTap: () => ref.read(movieFlowControllerProvider.notifier).toggleSelected(genre),
-                  );
-                },
-                itemCount: ref.watch(movieFlowControllerProvider).genres.length,
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: kListItemSpacing,
-                ),
+              child: ref.watch(movieFlowControllerProvider).genres.when(
+                  data: (genres) => ListView.separated(
+                    padding: const EdgeInsets.symmetric(vertical: kListItemSpacing),
+                    itemBuilder: (context, index) {
+                      final genre = genres[index];
+                      return ListCard(
+                        genre: genre,
+                        onTap: () => ref.read(movieFlowControllerProvider.notifier).toggleSelected(genre),
+                      );
+                    },
+                    itemCount: genres.length,
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: kListItemSpacing,
+                    ),
+                  ),
+                  error: (error,s) => const Center(
+                    child: Text('Something went wrong :('),
+                  ),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
               ),
             ),
             PrimaryButton(
