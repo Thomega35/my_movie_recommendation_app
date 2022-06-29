@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/movie_flow_state.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/movie_service.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/movie_flow_state.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/movie_service.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/result/movie.dart';
 
 final movieFlowControllerProvider =
     StateNotifierProvider.autoDispose<MovieFlowController, MovieFlowState>(
-  (ref) =>
-      MovieFlowController(
-          MovieFlowState(
-              pageController: PageController(),
-              movie: AsyncValue.data(Movie.initial()),
-              genres: const AsyncValue.data([]),
-          ),
-          ref.watch(movieServiceProvider),
-      ),
+  (ref) => MovieFlowController(
+    MovieFlowState(
+      pageController: PageController(),
+      movie: AsyncValue.data(Movie.initial()),
+      genres: const AsyncValue.data([]),
+    ),
+    ref.watch(movieServiceProvider),
+  ),
 );
 
 class MovieFlowController extends StateNotifier<MovieFlowState> {
   MovieFlowController(
-      MovieFlowState state,
-      this._movieService,
+    MovieFlowState state,
+    this._movieService,
   ) : super(state) {
-       loadGenres();
+    loadGenres();
   }
 
   final MovieService _movieService;
@@ -36,11 +35,14 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
 
   Future<void> getRecommendedMovie() async {
     state = state.copyWith(movie: const AsyncValue.loading());
-    final selectedGenres = state.genres.asData?.value.where((genre) => genre.isSelected == true).toList(growable: false) ?? [];
+    final selectedGenres = state.genres.asData?.value
+            .where((genre) => genre.isSelected == true)
+            .toList(growable: false) ??
+        [];
     final result = await _movieService.getRecommendedMovie(
-        state.rating,
-        state.yearsBack,
-        selectedGenres,
+      state.rating,
+      state.yearsBack,
+      selectedGenres,
     );
     state = state.copyWith(movie: AsyncValue.data(result));
   }
@@ -49,10 +51,7 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
     state = state.copyWith(
       genres: AsyncValue.data([
         for (final oldGenre in state.genres.asData!.value)
-          if (oldGenre == genre)
-            oldGenre.toggleSelected()
-          else
-            oldGenre,
+          if (oldGenre == genre) oldGenre.toggleSelected() else oldGenre,
       ]),
     );
   }
@@ -67,8 +66,8 @@ class MovieFlowController extends StateNotifier<MovieFlowState> {
 
   void nextPage() {
     if (state.pageController.page! >= 1) {
-      if (!state.genres.asData!.value.any((genre) =>
-      genre.isSelected == true)) {
+      if (!state.genres.asData!.value
+          .any((genre) => genre.isSelected == true)) {
         return;
       }
     }

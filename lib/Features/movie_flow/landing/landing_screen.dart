@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_movie_recommendation_app/Core/constants.dart';
-import 'package:my_movie_recommendation_app/Core/widgets/primary_button.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/movie_flow_controller.dart';
+import 'package:my_movie_recommendation_app/core/constants.dart';
+import 'package:my_movie_recommendation_app/core/widgets/primary_button.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/movie_flow_controller.dart';
 
 class LandingScreen extends ConsumerWidget {
   const LandingScreen({
@@ -28,10 +28,10 @@ class LandingScreen extends ConsumerWidget {
             const Spacer(),
             PrimaryButton(
               text: 'Get Started',
-              onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage,
+              onPressed:
+                  ref.read(movieFlowControllerProvider.notifier).nextPage,
             ),
             const SizedBox(height: kMediumSpacing),
-
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 
-class Palette{
+class Palette {
   static const Color almostBlack = Color(0xff040B13);
   static const Color red100 = Color(0xfffce5e8);
   static const Color red200 = Color(0xfff7b2ba);

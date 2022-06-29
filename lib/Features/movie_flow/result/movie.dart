@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie_entity.dart';
-
+import 'package:my_movie_recommendation_app/features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/result/movie_entity.dart';
 
 @immutable
 class Movie {
@@ -14,7 +13,7 @@ class Movie {
   final String? backdropPath;
   final String? posterPath;
 
-const Movie({
+  const Movie({
     required this.title,
     required this.overview,
     required this.voteAverage,
@@ -38,9 +37,12 @@ const Movie({
       title: entity.title,
       overview: entity.overview,
       voteAverage: entity.voteAverage,
-      genres: genres.where((element) => entity.genreIds.contains(element.id)).toList(growable: false),
+      genres: genres
+          .where((element) => entity.genreIds.contains(element.id))
+          .toList(growable: false),
       releaseDate: entity.releaseDate,
-      backdropPath: 'https://image.tmdb.org/t/p/original/${entity.backdropPath}',
+      backdropPath:
+          'https://image.tmdb.org/t/p/original/${entity.backdropPath}',
       posterPath: 'https://image.tmdb.org/t/p/original/${entity.posterPath}',
     );
   }

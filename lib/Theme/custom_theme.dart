@@ -20,8 +20,8 @@ class CustomTheme {
             800: Palette.red800,
             900: Palette.red900,
           },
-      ),
-      brightness: Brightness.dark,
+        ),
+        brightness: Brightness.dark,
       ).copyWith(secondary: Palette.red500),
       scaffoldBackgroundColor: Palette.almostBlack,
       appBarTheme: const AppBarTheme(
@@ -37,16 +37,15 @@ class CustomTheme {
         activeTickMarkColor: Colors.transparent,
       ),
       textTheme: theme.primaryTextTheme
-        .copyWith(
-          button: theme.primaryTextTheme.button?.copyWith(
+          .copyWith(
+              button: theme.primaryTextTheme.button?.copyWith(
             color: Colors.white,
             fontSize: 16,
             fontWeight: FontWeight.bold,
-          )
-        )
-        .apply(
-          displayColor: Colors.white,
-        ),
+          ))
+          .apply(
+            displayColor: Colors.white,
+          ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           backgroundColor: Palette.red500,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre.dart';
-import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recommendation_app/features/movie_flow/result/movie.dart';
 
 @immutable
 class MovieFlowState {
@@ -39,12 +39,12 @@ class MovieFlowState {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is MovieFlowState
-        && pageController == other.pageController
-        && rating == other.rating
-        && yearsBack == other.yearsBack
-        && genres == other.genres
-        && movie == other.movie;
+    return other is MovieFlowState &&
+        pageController == other.pageController &&
+        rating == other.rating &&
+        yearsBack == other.yearsBack &&
+        genres == other.genres &&
+        movie == other.movie;
   }
 
   @override
@@ -54,5 +54,4 @@ class MovieFlowState {
       yearsBack.hashCode ^
       genres.hashCode ^
       movie.hashCode;
-
 }

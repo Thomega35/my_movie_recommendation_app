@@ -23,11 +23,8 @@ class GenreEntity {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GenreEntity &&
-          id == other.id &&
-          name == other.name;
+      other is GenreEntity && id == other.id && name == other.name;
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode;
-
 }
