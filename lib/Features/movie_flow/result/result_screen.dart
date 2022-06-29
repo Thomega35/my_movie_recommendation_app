@@ -17,10 +17,8 @@ class ResultScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(ref.watch(movieFlowControllerProvider).movie);
     return ref.watch(movieFlowControllerProvider).movie.when(
         data: (movie) {
-          print(movie);
           return Scaffold(
           appBar: AppBar(
           ),

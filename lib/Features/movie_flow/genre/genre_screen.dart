@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_movie_recomandation_app/Core/widgets/primary_button.dart';
+import 'package:my_movie_recomandation_app/core/widgets/primary_button.dart';
 
-import 'package:my_movie_recomandation_app/Core/constants.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/movie_flow_controller.dart';
-import 'list_card.dart';
-
+import 'package:my_movie_recomandation_app/core/constants.dart';
+import 'package:my_movie_recomandation_app/features/movie_flow/movie_flow_controller.dart';
+import 'package:my_movie_recomandation_app/features/movie_flow/genre/list_card.dart';
 class GenreScreen extends ConsumerWidget {
 
   const GenreScreen({

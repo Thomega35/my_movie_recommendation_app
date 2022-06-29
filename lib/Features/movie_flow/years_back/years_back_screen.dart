@@ -57,7 +57,6 @@ class YearsBackScreen extends ConsumerWidget {
               text: 'Amazing!',
               onPressed: () async {
                 await ref.read(movieFlowControllerProvider.notifier).getRecommendedMovie();
-                print(ref.watch(movieFlowControllerProvider).movie);
                 Navigator.of(context).push(ResultScreen.route());
               },
               isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,

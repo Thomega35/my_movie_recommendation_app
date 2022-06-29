@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/movie_repository.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/result/movie.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recomandation_app/features/movie_flow/movie_repository.dart';
+import 'package:my_movie_recomandation_app/features/movie_flow/result/movie.dart';
+import 'package:my_movie_recomandation_app/features/movie_flow/genre/genre.dart';
 
 final movieServiceProvider = Provider<MovieService>((ref) {
   final movieRepository = ref.watch(movieRepositoryProvider);
