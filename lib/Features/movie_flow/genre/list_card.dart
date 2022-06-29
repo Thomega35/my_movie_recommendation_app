@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_movie_recomandation_app/Core/constants.dart';
+import 'package:my_movie_recommendation_app/Core/constants.dart';
 import 'genre.dart';
 
 class ListCard extends StatelessWidget {

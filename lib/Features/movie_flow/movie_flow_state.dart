@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/result/movie.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @immutable

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_movie_recomandation_app/Theme/palette.dart';
+import 'package:my_movie_recommendation_app/Theme/palette.dart';
 
 class CustomTheme {
   //dark theme

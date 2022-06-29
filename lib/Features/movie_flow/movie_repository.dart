@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_movie_recomandation_app/Core/environment_variables.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre_entity.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/result/movie_entity.dart';
-import 'package:my_movie_recomandation_app/main.dart';
+import 'package:my_movie_recommendation_app/Core/environment_variables.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre_entity.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie_entity.dart';
+import 'package:my_movie_recommendation_app/main.dart';
 
 final movieRepositoryProvider = Provider<MovieRepository>((ref) {
   final dio = ref.watch(dioProvider);

@@ -1,4 +1,4 @@
-name: my_movie_recomandation_app
+name: my_movie_recommendation_app
 description: Coding the application from the robertbrunhage course with Riverpod
 
 # The following line prevents the package from being accidentally published to

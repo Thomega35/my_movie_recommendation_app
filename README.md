@@ -1,4 +1,4 @@
-# my_movie_recomandation_app
+# my_movie_recommendation_app
 
 Coding the application from the robertbrunhage course with Riverpod
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:my_movie_recomandation_app/Core/widgets/primary_button.dart';
-import 'package:my_movie_recomandation_app/Core/constants.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow//movie_flow_controller.dart';
+import 'package:my_movie_recommendation_app/Core/widgets/primary_button.dart';
+import 'package:my_movie_recommendation_app/Core/constants.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow//movie_flow_controller.dart';
 import 'movie.dart';
 
 class ResultScreen extends ConsumerWidget {
@@ -20,50 +20,51 @@ class ResultScreen extends ConsumerWidget {
     return ref.watch(movieFlowControllerProvider).movie.when(
         data: (movie) {
           return Scaffold(
-          appBar: AppBar(
-          ),
-          body: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        CoverImage(movie: movie),
-                        Positioned(
-                          width: MediaQuery.of(context).size.width,
-                          bottom: -(movieHeight / 2),
-                          child: MovieImageDetail(
-                            movie: movie,
-                            movieHeight: movieHeight,
+            appBar: AppBar(
+            ),
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          CoverImage(movie: movie),
+                          Positioned(
+                            width: MediaQuery.of(context).size.width,
+                            bottom: -(movieHeight / 2),
+                            child: MovieImageDetail(
+                              movie: movie,
+                              movieHeight: movieHeight,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: movieHeight/2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        movie.overview,
-                        style: Theme.of(context).textTheme.bodyText2,
+                        ],
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: movieHeight/2,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          movie.overview,
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              PrimaryButton(
-                onPressed: () => Navigator.of(context).pop(),
-                text: 'Find another movie',
-              ),
-              const SizedBox(
-                height: kMediumSpacing,
-              ),
-            ],
-          ),
-        );},
+                PrimaryButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  text: 'Find another movie',
+                ),
+                const SizedBox(
+                  height: kMediumSpacing,
+                ),
+              ],
+            ),
+          );
+        },
         error: (error,s) => const Text('Something went wrong :('),
         loading: () => const Scaffold(
           body : Center(

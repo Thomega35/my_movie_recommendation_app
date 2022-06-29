@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/genre/genre.dart';
-import 'package:my_movie_recomandation_app/Features/movie_flow/result/movie_entity.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/genre/genre.dart';
+import 'package:my_movie_recommendation_app/Features/movie_flow/result/movie_entity.dart';
 
 
 @immutable
