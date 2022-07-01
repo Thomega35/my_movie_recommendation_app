@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_movie_recommendation_app/core/constants.dart';
 import 'package:my_movie_recommendation_app/core/widgets/primary_button.dart';
 import 'package:my_movie_recommendation_app/features/movie_flow/movie_flow_controller.dart';
-
 import 'package:my_movie_recommendation_app/features/movie_flow/result/movie.dart';
+import 'package:my_movie_recommendation_app/core/widgets/failure_screen.dart';
+import 'package:my_movie_recommendation_app/core/failure.dart';
 
 class ResultScreen extends ConsumerWidget {
   static route({bool fullScreenDialog = true}) => MaterialPageRoute(
@@ -65,7 +66,13 @@ class ResultScreen extends ConsumerWidget {
               ),
             );
           },
-          error: (error, s) => const Text('Something went wrong :('),
+          error: (error, s) {
+            if (error is Failure) {
+              return FailureScreen(message: error.message);
+            } else {
+              return const FailureScreen(message: 'Something went wrong :(');
+            }
+          },
           loading: () => const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),

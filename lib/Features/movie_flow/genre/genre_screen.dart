@@ -4,6 +4,8 @@ import 'package:my_movie_recommendation_app/core/constants.dart';
 import 'package:my_movie_recommendation_app/core/widgets/primary_button.dart';
 import 'package:my_movie_recommendation_app/features/movie_flow/genre/list_card.dart';
 import 'package:my_movie_recommendation_app/features/movie_flow/movie_flow_controller.dart';
+import 'package:my_movie_recommendation_app/core/failure.dart';
+import 'package:my_movie_recommendation_app/core/widgets/failure_screen.dart';
 
 class GenreScreen extends ConsumerWidget {
   const GenreScreen({
@@ -47,9 +49,13 @@ class GenreScreen extends ConsumerWidget {
                         height: kListItemSpacing,
                       ),
                     ),
-                    error: (error, s) => const Center(
-                      child: Text('Something went wrong :('),
-                    ),
+                    error: (error, s) {
+                      if (error is Failure) {
+                        return FailureBody(message: error.message);
+                      } else {
+                        return const FailureBody(message: 'Something went wrong :(');
+                      }
+                    },
                     loading: () => const Center(
                       child: CircularProgressIndicator(),
                     ),
