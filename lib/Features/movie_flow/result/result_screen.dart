@@ -20,65 +20,65 @@ class ResultScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(movieFlowControllerProvider).movie.when(
-          data: (movie) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
+      data: (movie) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    Stack(
+                      clipBehavior: Clip.none,
                       children: [
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            CoverImage(movie: movie),
-                            Positioned(
-                              width: MediaQuery.of(context).size.width,
-                              bottom: -(movieHeight / 2),
-                              child: MovieImageDetail(
-                                movie: movie,
-                                movieHeight: movieHeight,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: movieHeight / 2,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            movie.overview,
-                            style: Theme.of(context).textTheme.bodyText2,
+                        CoverImage(movie: movie),
+                        Positioned(
+                          width: MediaQuery.of(context).size.width,
+                          bottom: -(movieHeight / 2),
+                          child: MovieImageDetail(
+                            movie: movie,
+                            movieHeight: movieHeight,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  PrimaryButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    text: 'Find another movie',
-                  ),
-                  const SizedBox(
-                    height: kMediumSpacing,
-                  ),
-                ],
+                    SizedBox(
+                      height: movieHeight / 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        movie.overview,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            );
-          },
-          error: (error, s) {
-            if (error is Failure) {
-              return FailureScreen(message: error.message);
-            } else {
-              return const FailureScreen(message: 'Something went wrong :(');
-            }
-          },
-          loading: () => const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+              PrimaryButton(
+                onPressed: () => Navigator.of(context).pop(),
+                text: 'Find another movie',
+              ),
+              const SizedBox(
+                height: kMediumSpacing,
+              ),
+            ],
           ),
         );
+      },
+      error: (error, s) {
+        if (error is Failure) {
+          return FailureScreen(message: error.message);
+        } else {
+          return const FailureScreen(message: 'Something went wrong :(');
+        }
+      },
+      loading: () => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }
 
