@@ -15,7 +15,8 @@ class ResultScreenAnimation extends StatefulWidget {
   _ResultScreenAnimationState createState() => _ResultScreenAnimationState();
 }
 
-class _ResultScreenAnimationState extends State<ResultScreenAnimation> with SingleTickerProviderStateMixin {
+class _ResultScreenAnimationState extends State<ResultScreenAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -33,6 +34,7 @@ class _ResultScreenAnimationState extends State<ResultScreenAnimation> with Sing
     super.dispose();
     _controller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return ResultScreen(
@@ -47,75 +49,121 @@ class ResultScreen extends ConsumerWidget {
         fullscreenDialog: fullScreenDialog,
       );
 
-  const ResultScreen({
+  ResultScreen({
     Key? key,
-    required this.animationController
-  }) : super(key: key);
+    required this.animationController,
+  })  : titleOpacity = Tween<double>(begin: 0, end: 1).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0, 0.3),
+          ),
+        ),
+        genreOpacity = Tween<double>(begin: 0, end: 1).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0.3, 0.4),
+          ),
+        ),
+        ratingOpacity = Tween<double>(begin: 0, end: 1).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0.4, 0.6),
+          ),
+        ),
+        descriptionOpacity = Tween<double>(begin: 0, end: 1).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0.6, 0.8),
+          ),
+        ),
+        buttonOpacity = Tween<double>(begin: 0, end: 1).animate(
+          CurvedAnimation(
+            parent: animationController,
+            curve: const Interval(0.8, 1),
+          ),
+        ),
+        super(key: key);
   final AnimationController animationController;
+
+  final Animation<double> titleOpacity;
+  final Animation<double> genreOpacity;
+  final Animation<double> ratingOpacity;
+  final Animation<double> descriptionOpacity;
+  final Animation<double> buttonOpacity;
+
   final double movieHeight = 150;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(movieFlowControllerProvider).movie.when(
-      data: (movie) {
-        return Scaffold(
-          appBar: AppBar(),
-          body: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
+          data: (movie) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
                       children: [
-                        CoverImage(movie: movie),
-                        Positioned(
-                          width: MediaQuery.of(context).size.width,
-                          bottom: -(movieHeight / 2),
-                          child: MovieImageDetail(
-                            movie: movie,
-                            movieHeight: movieHeight,
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            CoverImage(movie: movie),
+                            Positioned(
+                              width: MediaQuery.of(context).size.width,
+                              bottom: -(movieHeight / 2),
+                              child: MovieImageDetail(
+                                movie: movie,
+                                movieHeight: movieHeight,
+                                titleOpacity: titleOpacity,
+                                ratingOpacity: ratingOpacity,
+                                genreOpacity: genreOpacity,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: movieHeight / 2,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: FadeTransition(
+                            opacity: descriptionOpacity,
+                            child: Text(
+                              movie.overview,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: movieHeight / 2,
+                  ),
+                  FadeTransition(
+                    opacity: buttonOpacity,
+                    child: PrimaryButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      text: 'Find another movie',
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        movie.overview,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: kMediumSpacing,
+                  ),
+                ],
               ),
-              PrimaryButton(
-                onPressed: () => Navigator.of(context).pop(),
-                text: 'Find another movie',
-              ),
-              const SizedBox(
-                height: kMediumSpacing,
-              ),
-            ],
+            );
+          },
+          error: (error, s) {
+            if (error is Failure) {
+              return FailureScreen(message: error.message);
+            } else {
+              return const FailureScreen(message: 'Something went wrong :(');
+            }
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
           ),
         );
-      },
-      error: (error, s) {
-        if (error is Failure) {
-          return FailureScreen(message: error.message);
-        } else {
-          return const FailureScreen(message: 'Something went wrong :(');
-        }
-      },
-      loading: () => const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
   }
 }
 
@@ -141,7 +189,7 @@ class CoverImage extends StatelessWidget {
         },
         blendMode: BlendMode.dstIn,
         child: NetworkFadingImage(
-          path : movie.backdropPath ?? '',
+          path: movie.backdropPath ?? '',
         ),
       ),
     );
@@ -153,10 +201,17 @@ class MovieImageDetail extends ConsumerWidget {
     Key? key,
     required this.movie,
     required this.movieHeight,
+    required this.titleOpacity,
+    required this.genreOpacity,
+    required this.ratingOpacity,
   }) : super(key: key);
 
   final Movie movie;
   final double movieHeight;
+
+  final Animation<double> titleOpacity;
+  final Animation<double> genreOpacity;
+  final Animation<double> ratingOpacity;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -170,7 +225,7 @@ class MovieImageDetail extends ConsumerWidget {
             width: 100,
             height: movieHeight,
             child: NetworkFadingImage(
-              path : movie.backdropPath ?? '',
+              path: movie.backdropPath ?? '',
             ),
           ),
           const SizedBox(width: kMediumSpacing),
@@ -178,29 +233,38 @@ class MovieImageDetail extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  movie.title,
-                  style: theme.textTheme.headline6,
+                FadeTransition(
+                  opacity: titleOpacity,
+                  child: Text(
+                    movie.title,
+                    style: theme.textTheme.headline6,
+                  ),
                 ),
-                Text(
-                  movie.genresCommaSeparated,
-                  style: Theme.of(context).textTheme.bodyText2,
+                FadeTransition(
+                  opacity: genreOpacity,
+                  child: Text(
+                    movie.genresCommaSeparated,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      '${movie.voteAverage}',
-                      style: theme.textTheme.bodyText2?.copyWith(
-                        color:
-                            theme.textTheme.bodyText2?.color?.withOpacity(0.62),
+                FadeTransition(
+                  opacity: ratingOpacity,
+                  child: Row(
+                    children: [
+                      Text(
+                        '${movie.voteAverage}',
+                        style: theme.textTheme.bodyText2?.copyWith(
+                          color: theme.textTheme.bodyText2?.color
+                              ?.withOpacity(0.62),
+                        ),
                       ),
-                    ),
-                    const Icon(
-                      Icons.star_rounded,
-                      size: 20,
-                      color: Colors.amber,
-                    ),
-                  ],
+                      const Icon(
+                        Icons.star_rounded,
+                        size: 20,
+                        color: Colors.amber,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
