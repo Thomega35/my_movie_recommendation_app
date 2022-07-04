@@ -8,14 +8,50 @@ import 'package:my_movie_recommendation_app/features/movie_flow/result/movie.dar
 import 'package:my_movie_recommendation_app/core/widgets/failure_screen.dart';
 import 'package:my_movie_recommendation_app/core/failure.dart';
 
+class ResultScreenAnimation extends StatefulWidget {
+  const ResultScreenAnimation({Key? key}) : super(key: key);
+
+  @override
+  _ResultScreenAnimationState createState() => _ResultScreenAnimationState();
+}
+
+class _ResultScreenAnimationState extends State<ResultScreenAnimation> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return ResultScreen(
+      animationController: _controller,
+    );
+  }
+}
+
 class ResultScreen extends ConsumerWidget {
   static route({bool fullScreenDialog = true}) => MaterialPageRoute(
-        builder: (context) => const ResultScreen(),
+        builder: (context) => const ResultScreenAnimation(),
         fullscreenDialog: fullScreenDialog,
       );
 
-  const ResultScreen({Key? key}) : super(key: key);
-
+  const ResultScreen({
+    Key? key,
+    required this.animationController
+  }) : super(key: key);
+  final AnimationController animationController;
   final double movieHeight = 150;
 
   @override
